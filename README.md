@@ -38,3 +38,14 @@ This project is licensed under the GNU General Public License v3.0 (GPL). You ar
 Special Clause for Commercial Users: Any party using Analog-OS for commercial purposes (e.g., installation in production instruments or sale of pre-wired harnesses) is required, in addition to the GPL, to send the author a postcard from their hometown (Legendary Cardware).
 
 To obtain the mailing address for postcards, please contact me (markus_guilleaume@gmx.de) or via Private Message or by opening an "Issue" in this repository.
+
+Integration Guide (English)
+
+v1.0 & v1.1: Focuses on the switchable interaction between the Volume and Tone pots (50s vs. Modern) and the integration of the Treble-Bleed circuit.
+
+
+
+v1.2: Introduces the Capacitor Cascade, allowing the user to toggle between two different capacitor values to shift the resonant peak.
+
+v1.2p: Adds Intelligent Load Correction. In a single-coil environment, it prevents the signal from "choking" when coils are in series (quasi-humbucker) by correcting the parallel load from 125k back to 250k.
+
