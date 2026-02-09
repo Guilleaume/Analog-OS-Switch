@@ -1,6 +1,5 @@
 # Analog-OS-Switch
 A modular signal architecture for guitar pickups (CRTS technology).
-Here is the complete, professional English version of your README.md for GitHub. It focuses strictly on the Logic Architecture and the Manifesto, exactly as we discussed.
 
 Analog-OS (v1.2p) – Guitar Signal Architecture
 🎸 "We don't change the pickup. We change the world the pickup lives in."
