@@ -1,0 +1,23 @@
+=============================================================================== ANALOG-OS - HARDWARE VISUALS REFERENCE
+[FILE: IMG_0344.JPG] Top-down view of the core logic wiring.
+
+Yellow/Red/Blue/Pink leads indicating the multi-track signal path.
+
+Clear separation of the DPDT poles to avoid crosstalk.
+
+[FILE: IMG_0345.JPG / IMG_0346.JPG] Side profile of the Mini-Toggle implementation.
+
+Switch Type: DPDT ON-OFF-ON.
+
+Insulation: Professional-grade heat-shrink tubing on all critical lugs.
+
+Note: The compact footprint allows installation in standard Stratocaster control cavities without additional routing.
+
+INTEGRATION GUIDE:
+Use the ASCII Circuit Diagram for point-to-point wiring instructions.
+
+Use the Hardware Visuals for wire dress and insulation standards.
+
+Refer to LOGIC.TXT for IEC pin assignments (11-24).
+
+=============================================================================== EOF - DOCUMENTATION COMPLETE
