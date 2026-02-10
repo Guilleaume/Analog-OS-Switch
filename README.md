@@ -53,10 +53,10 @@ The modular choice is guided by the guitar's physical constraints:
 2. HARDWARE: Choice between Mini-Toggles (optimal for logic switching) or 
    Push-Pull pots (maintaining stock appearance).
 
-[LICENSE & CARDWARE]
-Licensed under GNU GPL v3.0. Commercial users must adhere to the 
-"Legendary Cardware" clause: A physical postcard from your hometown is 
-required to authorize commercial use of the Analog-OS design.
+License
+This project is licensed under the GNU GPL v3.0.
+
+The Legendary Cardware Clause (Optional): I love seeing where this code ends up! If you find this project useful—especially if you're using it commercially—sending a physical postcard from your hometown would be greatly appreciated (though not required). It’s a great way to support the "tinkerer spirit"!
 
 Contact: markus_guilleaume@gmx.de
 ===============================================================================
