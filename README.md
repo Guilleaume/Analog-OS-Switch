@@ -1,8 +1,8 @@
-# Analog-OS-Switch
+# Analog-OS-Design
 A modular signal architecture for guitar pickups (CRTS technology).
 
 Analog-OS (v1.2p) – Guitar Signal Architecture
-🎸 "We don't change the pickup. We change the world the pickup lives in."
+"We don't change the pickup. We change the world the pickup lives in."
 Analog-OS is a modular signal architecture for electric guitars. While traditional modifications often require physical intervention (such as converting vintage pickups to 4-conductor wire), Analog-OS optimizes the electrical environment—specifically the load and capacitance—surrounding the pickup.
 
 Core System Logic
@@ -31,7 +31,7 @@ Logic Schematics: Detailed tabular pin assignments for versions 1.0 through 1.2p
 
 Implementation Guide: Descriptions for wire connections between DPDT switches and potentiometers.
 
-License & Cardware 📬
+License & Cardware
 This project is licensed under the GNU General Public License v3.0 (GPL). You are free to copy, modify, and distribute it, provided that derivative works remain under the same license.
 
 Special Clause for Commercial Users: Any party using Analog-OS for commercial purposes (e.g., installation in production instruments or sale of pre-wired harnesses) is required, in addition to the GPL, to send the author a postcard from their hometown (Legendary Cardware).
