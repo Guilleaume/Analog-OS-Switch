@@ -1,0 +1,55 @@
+===============================================================================
+ANALOG-OS (v1.2p) - SCHEMATIC LOGIC & PIN ASSIGNMENTS (IEC)
+===============================================================================
+
+[SWITCH DEFINITION: DPDT (Push-Pull, Push-Push or Mini-Toggle)]
+
+   11 -> NC (Normally Closed)       21 -> NC (Normally Closed)
+   12 -> COM (Common/Center)        22 -> COM (Common/Center)
+   14 -> NO (Normally Open)         24 -> NO (Normally Open)
+
+   ON-ON Logic:       Pos A = COM <-> NO  |  Pos B = COM <-> NC
+   ON-OFF-ON Logic:   Pos A = COM <-> NO  |  MID = Open  |  Pos B = COM <-> NC
+
+-------------------------------------------------------------------------------
+VERSION 1.0 (Basic Analog-OS Switch)
+-------------------------------------------------------------------------------
+Goal: Toggle between 50s and Modern Wiring.
+
+PIN | ASSIGNMENT
+----|--------------------------------------------------------------------------
+21  | (NC) Wire to Lug 3 of Volume Pot (Input)
+22  | (COM) Wire to Lug 2 of Tone Pot
+24  | (NO) Wire to Lug 2 of Volume Pot (Output)
+
+-------------------------------------------------------------------------------
+VERSION 1.1 / 1.2p (Integrated Treble-Bleed + Intelligent Load)
+-------------------------------------------------------------------------------
+Goal: Modern/50s toggle. Treble-Bleed active ONLY in Modern (Pos A).
+Note: v1.2p uses ON-OFF-ON for "Tone-Bypass" in Middle Position.
+
+PIN | ASSIGNMENT
+----|--------------------------------------------------------------------------
+12  | (COM) Wire to Lug 2 of Volume Pot (Output)
+14  | (NO) Treble-Bleed (Side A)
+21  | (NC) Wire to Lug 3 of Volume Pot (Input)
+22  | (COM) Wire to Lug 2 of Tone Pot AND Treble-Bleed (Side B)
+24  | (NO) Wire to Lug 2 of Volume Pot (Output)
+
+* LOAD CORRECTION (v1.2p only): In "OFF" (Mid), Tone Pot is isolated.
+  Perfect for series-switched Single-Coils to restore 250k load.
+
+-------------------------------------------------------------------------------
+VERSION 1.2 (Capacitor Cascade)
+-------------------------------------------------------------------------------
+Goal: Switch 1 = v1.1 Logic | Switch 2 = Frequency Shift
+
+PIN | ASSIGNMENT (Switch 2)
+----|--------------------------------------------------------------------------
+21  | (NC) Capacitor 1 (Other end to ground)
+22  | (COM) Wire to Lug 3 of Tone Pot
+24  | (NO) Capacitor 2 (Other end to ground)
+
+===============================================================================
+EOF - END OF FILE
+===============================================================================
