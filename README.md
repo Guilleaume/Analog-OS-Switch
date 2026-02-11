@@ -52,6 +52,268 @@ The modular choice is guided by the guitar's physical constraints:
    Analog-OS provides dedicated solutions for both.
 2. HARDWARE: Choice between Mini-Toggles (optimal for logic switching) or 
    Push-Pull pots (maintaining stock appearance).
+===============================================================================
+ANALOG-OS - ASCII CIRCUIT DIAGRAMS
+===============================================================================
+
+-------------------------------------------------------------------------------
+VERSION 1.0 - BASIC ANALOG-OS SWITCH (50s/Modern Toggle)
+-------------------------------------------------------------------------------
+
+                    PICKUP HOT
+                        │
+                        │
+                    ┌───┴───┐
+                    │  Vol  │  Volume Pot (250k/500k)
+                    │ Lug 3 │◄─────────────────┐
+                    └───┬───┘                  │
+                        │                      │
+                    ┌───┴───┐              ┌───┴───┐
+                    │  Vol  │              │ DPDT  │
+                    │ Lug 2 │◄─────────────┤  22   │ COM (to Tone Lug 2)
+                    └───┬───┘              └───┬───┘
+                        │                      │
+                        ├──────────────────────┤
+                        │                      │
+                        │                  ┌───┴───┐
+                    ┌───┴───┐              │ DPDT  │
+                    │  Vol  │              │  24   │ NO (Position A = Modern)
+                    │ Lug 1 │              └───────┘
+                    └───┬───┘                  │
+                        │                      │
+                       GND                 ┌───┴───┐
+                        │                  │ DPDT  │
+                    ┌───┴───┐              │  21   │ NC (Position B = 50s)
+                    │ Tone  │              └───┬───┘
+                    │ Lug 2 │◄─────────────────┘
+                    └───┬───┘
+                        │
+                    ┌───┴───┐
+                    │ Tone  │
+                    │ Lug 3 │
+                    └───┬───┘
+                        │
+                      [Cap]──┐ (22nF-47nF)
+                        │    │
+                    ┌───┴────┴──┐
+                    │   Tone    │
+                    │   Lug 1   │
+                    └─────┬─────┘
+                          │
+                         GND
+
+SWITCH LOGIC:
+Position A (NO):  Vol Lug 2 → [24-22] → Tone Lug 2  (MODERN WIRING)
+Position B (NC):  Vol Lug 3 → [21-22] → Tone Lug 2  (50s WIRING)
+
+OUTPUT: Volume Lug 2 → Jack Tip
+
+-------------------------------------------------------------------------------
+VERSION 1.1 - INTEGRATED TREBLE-BLEED
+-------------------------------------------------------------------------------
+
+                    PICKUP HOT
+                        │
+                        │
+                    ┌───┴───┐
+                    │  Vol  │  Volume Pot
+                    │ Lug 3 │◄─────────────────┐
+                    └───┬───┘                  │
+                        │                      │
+                    ┌───┴───┐              ┌───┴───┐
+                    │  Vol  │              │ DPDT  │
+                    │ Lug 2 │◄─────────────┤  21   │ NC (to Vol Lug 3)
+                    └───┬───┘              └───────┘
+                        │
+                        ├──────────────────┐
+                        │                  │
+                        │              ┌───┴───┐
+                        │              │ DPDT  │
+                        │              │  12   │ COM
+                        │              └───┬───┘
+                        │                  │
+                        │              ┌───┴───┐
+                        │              │ DPDT  │
+                        │              │  24   │ NO (to Vol Lug 2)
+                        │              └───────┘
+                        │                  │
+                    ┌───┴───┐              │
+                    │  Vol  │              │
+                    │ Lug 1 │              │
+                    └───┬───┘              │
+                        │                  │
+                       GND             ┌───┴────┐
+                        │              │ DPDT   │
+                    ┌───┴───┐          │  22    │ COM (to Tone Lug 2)
+                    │ Tone  │          └───┬────┘
+                    │ Lug 2 │◄─────────────┤
+                    └───┬───┘              │
+                        │                  │
+                        │              ┌───┴────┐
+                        │              │ DPDT   │
+                        │              │  14    │ NO (Treble-Bleed Side A)
+                        │              └───┬────┘
+                        │                  │
+                    ┌───┴───┐          [T-Bleed Network]
+                    │ Tone  │              │
+                    │ Lug 3 │          ┌───┴────┐
+                    └───┬───┘          │  1nF   │
+                        │              │   +    │ (Cap + Resistor in series)
+                      [Cap]──┐         │ 150kΩ  │
+                        │    │         └───┬────┘
+                    ┌───┴────┴──┐          │
+                    │   Tone    │          │
+                    │   Lug 1   │◄─────────┘ (Treble-Bleed Side B → Pin 22)
+                    └─────┬─────┘
+                          │
+                         GND
+
+SWITCH LOGIC:
+Position A (NO):  Modern + Treble-Bleed ACTIVE
+  - Vol Lug 2 → [12-24] → Vol Lug 2 (loopback via switch)
+  - Treble-Bleed: Pin 14 → Network → Pin 22 → Tone Lug 2
+
+Position B (NC):  50s Wiring (Treble-Bleed BYPASSED)
+  - Vol Lug 3 → [21-22] → Tone Lug 2
+
+OUTPUT: Volume Lug 2 → Jack Tip
+
+-------------------------------------------------------------------------------
+VERSION 1.2p - INTELLIGENT LOAD CORRECTION (ON-OFF-ON)
+-------------------------------------------------------------------------------
+
+Same wiring as v1.1, BUT using ON-OFF-ON switch:
+
+                    PICKUP HOT
+                        │
+                        │
+                    ┌───┴───┐
+                    │  Vol  │  Volume Pot
+                    │ Lug 3 │◄─────────────────┐
+                    └───┬───┘                  │
+                        │                      │
+                    ┌───┴───┐              ┌───┴───┐
+                    │  Vol  │              │ DPDT  │
+                    │ Lug 2 │◄─────────────┤  21   │ NC
+                    └───┬───┘              └───────┘
+                        │
+                        ├──────────────────┐
+                        │                  │
+                        │              ┌───┴───┐
+                        │              │ DPDT  │
+                        │              │  12   │ COM
+                        │              └───┬───┘
+                        │                  │
+                        │              ┌───┴───┐
+                        │              │ DPDT  │
+                        │              │  24   │ NO
+                        │              └───────┘
+                        │                  
+                    ┌───┴───┐              
+                    │  Vol  │              
+                    │ Lug 1 │              
+                    └───┬───┘              
+                        │                  
+                       GND             ┌─────────┐
+                        │              │  DPDT   │
+                    ┌───┴───┐   ┌──────┤   22    │ COM
+                    │ Tone  │   │      └─────────┘
+                    │ Lug 2 │◄──┤          │
+                    └───┬───┘   │      ┌───┴────┐
+                        │       │      │ DPDT   │
+                    ┌───┴───┐   │      │  14    │ NO (T-Bleed Side A)
+                    │ Tone  │   │      └───┬────┘
+                    │ Lug 3 │   │          │
+                    └───┬───┘   │      [T-Bleed]
+                        │       │          │
+                      [Cap]──┐  └──────────┘
+                        │    │
+                    ┌───┴────┴──┐
+                    │   Tone    │
+                    │   Lug 1   │
+                    └─────┬─────┘
+                          │
+                         GND
+
+SWITCH POSITIONS (ON-OFF-ON):
+
+Position A (NO):     Modern + Treble-Bleed ACTIVE
+  - Vol Lug 2 → [12-24] loopback
+  - Pin 14 → T-Bleed → Pin 22 → Tone Lug 2
+
+Position MID (OFF):  TONE POT BYPASSED (Load Correction!)
+  - All connections OPEN
+  - Tone Pot electrically isolated
+  - Effective load: 250kΩ (Volume only)
+  → Perfect for Series-Switched Single-Coils!
+
+Position B (NC):     50s Wiring
+  - Vol Lug 3 → [21-22] → Tone Lug 2
+
+OUTPUT: Volume Lug 2 → Jack Tip
+
+LOAD ANALYSIS:
+Standard:        Vol (250k) || Tone (250k) = 125kΩ
+MID Position:    Vol (250k) alone          = 250kΩ  ← CORRECTED!
+
+-------------------------------------------------------------------------------
+VERSION 1.2 - CAPACITOR CASCADE (DUAL DPDT)
+-------------------------------------------------------------------------------
+
+Requires TWO switches:
+  - Switch 1: v1.1 Logic (Modern/50s + Treble-Bleed)
+  - Switch 2: Capacitor Selection
+
+SWITCH 1: Same as v1.1 (see above)
+
+SWITCH 2 (Capacitor Cascade):
+
+                    ┌───────────┐
+                    │   Tone    │
+                    │   Lug 3   │
+                    └─────┬─────┘
+                          │
+                      ┌───┴───┐
+                      │ DPDT  │
+                      │  22   │ COM
+                      └───┬───┘
+                          │
+              ┌───────────┼───────────┐
+              │                       │
+          ┌───┴───┐               ┌───┴───┐
+          │ DPDT  │               │ DPDT  │
+          │  21   │ NC            │  24   │ NO
+          └───┬───┘               └───┬───┘
+              │                       │
+          [Cap 1]                 [Cap 2]
+          (22nF)                  (47nF)
+              │                       │
+              └───────────┬───────────┘
+                          │
+                         GND
+
+SWITCH 2 LOGIC:
+Position A (NO):  Cap 2 (47nF) → Darker/Warmer tone
+Position B (NC):  Cap 1 (22nF) → Brighter tone
+
+Combined with Switch 1:
+  - Modern/50s toggle (Switch 1)
+  - Bright/Dark toggle (Switch 2)
+  = 4 tonal variations total!
+
+===============================================================================
+LEGEND
+===============================================================================
+│ ─ ┌ ┐ └ ┘ ├ ┤ ┬ ┴ ┼  = Wire connections
+◄              = Direction indicator
+[Cap]          = Capacitor
+[T-Bleed]      = Treble-Bleed Network (Cap + Resistor)
+GND            = Ground connection
+DPDT           = Double-Pole Double-Throw switch
+NO             = Normally Open contact
+NC             = Normally Closed contact
+COM            = Common/Center contact
+
 
 License
 This project is licensed under the GNU GPL v3.0.
@@ -59,6 +321,9 @@ This project is licensed under the GNU GPL v3.0.
 The Legendary Cardware Clause (Optional): I love seeing where this code ends up! If you find this project useful—especially if you're using it commercially—sending a physical postcard from your hometown would be greatly appreciated (though not required). It’s a great way to support the "tinkerer spirit"!
 
 Contact: markus_guilleaume@gmx.de
+
+Keywords & Tech-Stack: Guitar Electronics | Wiring Diagrams | Tone Modifications | Soldering | Analog Signal Paths | guitar-wiring | analog-electronics | impedance-matching | circuit-design | schematics | tone-shaping | passive-circuits | ascii-art | diy-guitar | load-correction | 50s-Wiring | Modern-Wiring
+
 ===============================================================================
 EOF - END OF FILE
 ===============================================================================
