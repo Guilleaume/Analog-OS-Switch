@@ -52,6 +52,7 @@ The modular choice is guided by the guitar's physical constraints:
    Analog-OS provides dedicated solutions for both.
 2. HARDWARE: Choice between Mini-Toggles (optimal for logic switching) or 
    Push-Pull pots (maintaining stock appearance).
+   
 ===============================================================================
 ANALOG-OS - ASCII CIRCUIT DIAGRAMS
 ===============================================================================
@@ -59,7 +60,7 @@ ANALOG-OS - ASCII CIRCUIT DIAGRAMS
 -------------------------------------------------------------------------------
 VERSION 1.0 - BASIC ANALOG-OS SWITCH (50s/Modern Toggle)
 -------------------------------------------------------------------------------
-
+```text
                     PICKUP HOT
                         │
                         │
@@ -101,7 +102,7 @@ VERSION 1.0 - BASIC ANALOG-OS SWITCH (50s/Modern Toggle)
                     └─────┬─────┘
                           │
                          GND
-
+```
 SWITCH LOGIC:
 Position A (NO):  Vol Lug 2 → [24-22] → Tone Lug 2  (MODERN WIRING)
 Position B (NC):  Vol Lug 3 → [21-22] → Tone Lug 2  (50s WIRING)
@@ -111,7 +112,7 @@ OUTPUT: Volume Lug 2 → Jack Tip
 -------------------------------------------------------------------------------
 VERSION 1.1 - INTEGRATED TREBLE-BLEED
 -------------------------------------------------------------------------------
-
+```text
                     PICKUP HOT
                         │
                         │
@@ -167,7 +168,7 @@ VERSION 1.1 - INTEGRATED TREBLE-BLEED
                     └─────┬─────┘
                           │
                          GND
-
+```
 SWITCH LOGIC:
 Position A (NO):  Modern + Treble-Bleed ACTIVE
   - Vol Lug 2 → [12-24] → Vol Lug 2 (loopback via switch)
@@ -183,7 +184,7 @@ VERSION 1.2p - INTELLIGENT LOAD CORRECTION (ON-OFF-ON)
 -------------------------------------------------------------------------------
 
 Same wiring as v1.1, BUT using ON-OFF-ON switch:
-
+```text
                     PICKUP HOT
                         │
                         │
@@ -234,7 +235,7 @@ Same wiring as v1.1, BUT using ON-OFF-ON switch:
                     └─────┬─────┘
                           │
                          GND
-
+```
 SWITCH POSITIONS (ON-OFF-ON):
 
 Position A (NO):     Modern + Treble-Bleed ACTIVE
@@ -267,7 +268,7 @@ Requires TWO switches:
 SWITCH 1: Same as v1.1 (see above)
 
 SWITCH 2 (Capacitor Cascade):
-
+```text
                     ┌───────────┐
                     │   Tone    │
                     │   Lug 3   │
@@ -291,7 +292,7 @@ SWITCH 2 (Capacitor Cascade):
               └───────────┬───────────┘
                           │
                          GND
-
+```
 SWITCH 2 LOGIC:
 Position A (NO):  Cap 2 (47nF) → Darker/Warmer tone
 Position B (NC):  Cap 1 (22nF) → Brighter tone
