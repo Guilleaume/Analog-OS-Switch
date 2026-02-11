@@ -52,6 +52,124 @@ The modular choice is guided by the guitar's physical constraints:
    Analog-OS provides dedicated solutions for both.
 2. HARDWARE: Choice between Mini-Toggles (optimal for logic switching) or 
    Push-Pull pots (maintaining stock appearance).
+
+===============================================================================
+TONE POT - KORREKTE VERDRAHTUNG (Korrektur!)
+===============================================================================
+
+STANDARD TONE CONTROL (Richtig):
+```text
+                    Signal vom Volume
+                           │
+                       ┌───┴───┐
+                       │ Tone  │
+                       │ Lug 2 │ ← Wiper (Signal Input)
+                       └───┬───┘
+                           │
+                       ┌───┴───┐
+                       │ Tone  │
+                       │ Lug 3 │ ← Capacitor hier!
+                       └───┬───┘
+                           │
+                         [Cap] ──→ Pot Casing (Ground)
+                           
+                       ┌───────┐
+                       │ Tone  │
+                       │ Lug 1 │ ← BLEIBT FREI! (No connection)
+                       └───────┘
+```
+WARUM DAS SO IST:
+
+Der Tone-Regler ist ein VARIABLER WIDERSTAND zwischen Signal und Cap:
+- Tone auf "10": Wiper (Lug 2) weit weg von Cap (Lug 3) 
+  → Hoher Widerstand → Wenig Höhen gehen zur Masse → Hell
+  
+- Tone auf "0": Wiper (Lug 2) nah an Cap (Lug 3)
+  → Niedriger Widerstand → Viele Höhen gehen zur Masse → Dunkel
+
+Lug 1 bleibt OFFEN, weil:
+  - Der Poti fungiert nur als variabler Widerstand ZWISCHEN Lug 2 und 3
+  - Lug 1 wird NICHT benötigt für diese Funktion
+  - Wenn Lug 1 geerdet wäre → bei "0" würde GANZES Signal zu Masse → Stille!
+
+===============================================================================
+Fehler!
+===============================================================================
+
+❌ FALSCH (was ich gezeigt hatte):
+  Lug 1 → Ground
+  Lug 3 → Cap → Ground
+  → Bei Tone auf "0" wird Lug 2 mit Lug 1 verbunden = Totale Masse = STILLE!
+
+✅ RICHTIG (Standard-Verdrahtung):
+  Lug 1 → FREI (no connection)
+  Lug 2 → Signal vom Volume/Switch
+  Lug 3 → Cap → Pot Casing (Ground)
+
+NUR BEIM VOLUME POT:
+  Lug 1 → Ground (um Signal bei "0" abzuschalten)
+  Lug 2 → Output
+  Lug 3 → Input
+
+===============================================================================
+KORRIGIERTE ASCII-DIAGRAMME FÜR ANALOG-OS
+===============================================================================
+
+VERSION 1.0 - KORREKT:
+```text
+                    PICKUP HOT
+                        │
+                    ┌───┴───┐
+                    │  Vol  │
+                    │ Lug 3 │◄──────────────┐
+                    └───┬───┘               │
+                        │                   │
+                    ┌───┴───┐           ┌───┴───┐
+                    │  Vol  │           │ DPDT  │
+                    │ Lug 2 │◄──────────┤  22   │ COM
+                    └───┬───┘           └───┬───┘
+                        │                   │
+                        │               ┌───┴───┐
+                    ┌───┴───┐           │ DPDT  │
+                    │  Vol  │           │  24   │ NO (Pos A)
+                    │ Lug 1 │           └───────┘
+                    └───┬───┘               │
+                        │               ┌───┴───┐
+                       GND              │ DPDT  │
+                                        │  21   │ NC (Pos B)
+                    ┌───────┐           └───┬───┘
+                    │ Tone  │               │
+                    │ Lug 2 │◄──────────────┘
+                    └───┬───┘
+                        │
+                    ┌───┴───┐
+                    │ Tone  │
+                    │ Lug 3 │
+                    └───┬───┘
+                        │
+                      [Cap]───→ Pot Casing (Ground)
+                        
+                    ┌───────┐
+                    │ Tone  │
+                    │ Lug 1 │ ← FREI! (No connection)
+                    └───────┘
+
+OUTPUT: Volume Lug 2 → Jack Tip
+```
+===============================================================================
+WICHTIGE ERKENNTNIS
+===============================================================================
+
+Ich hatte die Tone-Pot Verdrahtung mit der Volume-Pot Verdrahtung verwechselt!
+
+VOLUME POT: Lug 1 = Ground (um bei "0" alles abzuschalten)
+TONE POT:   Lug 1 = FREI (nur variabler Widerstand zwischen 2 und 3)
+
+
+===============================================================================
+END OF KORREKTUR
+===============================================================================
+
    
 ===============================================================================
 ANALOG-OS - ASCII CIRCUIT DIAGRAMS
