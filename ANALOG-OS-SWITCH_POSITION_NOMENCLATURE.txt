@@ -1,0 +1,101 @@
+===============================================================================
+ANALOG-OS - SWITCH POSITION NOMENCLATURE
+===============================================================================
+
+UNIVERSAL NOTATION (Hardware-agnostic):
+  Position A = NO active  (Normally Open contacts: 14, 24)
+  Position B = NC active  (Normally Closed contacts: 11, 21)
+
+This notation works for ALL switch types and ensures consistency across
+different hardware implementations.
+
+-------------------------------------------------------------------------------
+HARDWARE-SPECIFIC MAPPINGS
+-------------------------------------------------------------------------------
+
+PUSH-PULL POTENTIOMETERS:
+  Position A (NO) = PULLED UP    → Modern Wiring + Treble-Bleed
+  Position B (NC) = PUSHED DOWN  → 50s Wiring (Resting State)
+
+  Visual cue: Knob height indicates mode
+    - Flush (pushed) = Vintage/Stock sound
+    - Raised (pulled) = Modern/Enhanced sound
+
+
+MINI-TOGGLE SWITCHES:
+  Position A (NO) = UP (or LEFT, depending on orientation)
+  Position B (NC) = DOWN (or RIGHT)
+
+  Recommended labeling on pickguard/control plate:
+    - "Modern" / "50s" 
+    - "M" / "V" (Modern/Vintage)
+    - Simple arrow indicators: ↑ Modern | ↓ Vintage
+
+
+PUSH-PUSH POTENTIOMETERS:
+  Position A (NO) = First click  → Modern Wiring + Treble-Bleed
+  Position B (NC) = Second click → 50s Wiring
+
+  Note: No visual indicator when switched! Requires careful tracking.
+  Consider adding small LED if clarity is critical.
+
+-------------------------------------------------------------------------------
+ON-OFF-ON SWITCHES (v1.2p only)
+-------------------------------------------------------------------------------
+
+THREE-POSITION MAPPING:
+  Position A (NO)  = UP/PULLED     → Modern + Treble-Bleed
+  Position MID     = CENTER        → Tone Bypass (Load Correction)
+  Position B (NC)  = DOWN/PUSHED   → 50s Wiring
+
+MINI-TOGGLE (3-way):
+  Recommended labeling:
+    ↑ Modern
+    ─ Bypass  (or "HB" for Humbucker mode)
+    ↓ Vintage
+
+PUSH-PULL (rare, but exists):
+  Cannot implement ON-OFF-ON! Use mini-toggle for v1.2p.
+
+===============================================================================
+RECOMMENDED LABELING FOR BUILDS
+===============================================================================
+
+PROFESSIONAL INSTALLATION (visible labels):
+┌─────────────────────────────────────┐
+│   ANALOG-OS SWITCH                  │
+│                                     │
+│   ↑  Modern  (Treble-Bleed)         │
+│   ─  Bypass  (v1.2p only)           │
+│   ↓  Vintage (50s)                  │
+└─────────────────────────────────────┘
+
+STEALTH INSTALLATION (no labels, player knows):
+  - Use tactile feedback (click position)
+  - Document in case/online manual
+  - Small sticker inside control cavity
+
+===============================================================================
+TESTING REFERENCE (Multimeter)
+===============================================================================
+
+CONTINUITY TEST (switch in each position):
+
+Position A (NO):
+  12 ←→ 14: BEEP ✓
+  22 ←→ 24: BEEP ✓
+  12 ←→ 11: no beep
+  22 ←→ 21: no beep
+
+Position B (NC):
+  12 ←→ 11: BEEP ✓
+  22 ←→ 21: BEEP ✓
+  12 ←→ 14: no beep
+  22 ←→ 24: no beep
+
+Position MID (v1.2p only):
+  All pairs: no beep (complete isolation)
+
+===============================================================================
+EOF - END OF FILE
+===============================================================================
