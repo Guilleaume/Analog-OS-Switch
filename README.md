@@ -54,125 +54,7 @@ The modular choice is guided by the guitar's physical constraints:
    Push-Pull pots (maintaining stock appearance).
 
 ===============================================================================
-TONE POT - KORREKTE VERDRAHTUNG (Korrektur!)
-===============================================================================
-
-STANDARD TONE CONTROL (Richtig):
-```text
-                    Signal vom Volume
-                           │
-                       ┌───┴───┐
-                       │ Tone  │
-                       │ Lug 2 │ ← Wiper (Signal Input)
-                       └───┬───┘
-                           │
-                       ┌───┴───┐
-                       │ Tone  │
-                       │ Lug 3 │ ← Capacitor hier!
-                       └───┬───┘
-                           │
-                         [Cap] ──→ Pot Casing (Ground)
-                           
-                       ┌───────┐
-                       │ Tone  │
-                       │ Lug 1 │ ← BLEIBT FREI! (No connection)
-                       └───────┘
-```
-WARUM DAS SO IST:
-
-Der Tone-Regler ist ein VARIABLER WIDERSTAND zwischen Signal und Cap:
-- Tone auf "10": Wiper (Lug 2) weit weg von Cap (Lug 3) 
-  → Hoher Widerstand → Wenig Höhen gehen zur Masse → Hell
-  
-- Tone auf "0": Wiper (Lug 2) nah an Cap (Lug 3)
-  → Niedriger Widerstand → Viele Höhen gehen zur Masse → Dunkel
-
-Lug 1 bleibt OFFEN, weil:
-  - Der Poti fungiert nur als variabler Widerstand ZWISCHEN Lug 2 und 3
-  - Lug 1 wird NICHT benötigt für diese Funktion
-  - Wenn Lug 1 geerdet wäre → bei "0" würde GANZES Signal zu Masse → Stille!
-
-===============================================================================
-Fehler!
-===============================================================================
-
-❌ FALSCH (was ich gezeigt hatte):
-  Lug 1 → Ground
-  Lug 3 → Cap → Ground
-  → Bei Tone auf "0" wird Lug 2 mit Lug 1 verbunden = Totale Masse = STILLE!
-
-✅ RICHTIG (Standard-Verdrahtung):
-  Lug 1 → FREI (no connection)
-  Lug 2 → Signal vom Volume/Switch
-  Lug 3 → Cap → Pot Casing (Ground)
-
-NUR BEIM VOLUME POT:
-  Lug 1 → Ground (um Signal bei "0" abzuschalten)
-  Lug 2 → Output
-  Lug 3 → Input
-
-===============================================================================
-KORRIGIERTE ASCII-DIAGRAMME FÜR ANALOG-OS
-===============================================================================
-
-VERSION 1.0 - KORREKT:
-```text
-                    PICKUP HOT
-                        │
-                    ┌───┴───┐
-                    │  Vol  │
-                    │ Lug 3 │◄──────────────┐
-                    └───┬───┘               │
-                        │                   │
-                    ┌───┴───┐           ┌───┴───┐
-                    │  Vol  │           │ DPDT  │
-                    │ Lug 2 │◄──────────┤  22   │ COM
-                    └───┬───┘           └───┬───┘
-                        │                   │
-                        │               ┌───┴───┐
-                    ┌───┴───┐           │ DPDT  │
-                    │  Vol  │           │  24   │ NO (Pos A)
-                    │ Lug 1 │           └───────┘
-                    └───┬───┘               │
-                        │               ┌───┴───┐
-                       GND              │ DPDT  │
-                                        │  21   │ NC (Pos B)
-                    ┌───────┐           └───┬───┘
-                    │ Tone  │               │
-                    │ Lug 2 │◄──────────────┘
-                    └───┬───┘
-                        │
-                    ┌───┴───┐
-                    │ Tone  │
-                    │ Lug 3 │
-                    └───┬───┘
-                        │
-                      [Cap]───→ Pot Casing (Ground)
-                        
-                    ┌───────┐
-                    │ Tone  │
-                    │ Lug 1 │ ← FREI! (No connection)
-                    └───────┘
-
-OUTPUT: Volume Lug 2 → Jack Tip
-```
-===============================================================================
-WICHTIGE ERKENNTNIS
-===============================================================================
-
-Ich hatte die Tone-Pot Verdrahtung mit der Volume-Pot Verdrahtung verwechselt!
-
-VOLUME POT: Lug 1 = Ground (um bei "0" alles abzuschalten)
-TONE POT:   Lug 1 = FREI (nur variabler Widerstand zwischen 2 und 3)
-
-
-===============================================================================
-END OF KORREKTUR
-===============================================================================
-
-   
-===============================================================================
-ANALOG-OS - ASCII CIRCUIT DIAGRAMS
+ANALOG-OS - ASCII CIRCUIT DIAGRAMS (CORRECTED)
 ===============================================================================
 
 -------------------------------------------------------------------------------
@@ -212,14 +94,13 @@ VERSION 1.0 - BASIC ANALOG-OS SWITCH (50s/Modern Toggle)
                     │ Lug 3 │
                     └───┬───┘
                         │
-                      [Cap]──┐ (22nF-47nF)
-                        │    │
-                    ┌───┴────┴──┐
-                    │   Tone    │
-                    │   Lug 1   │
-                    └─────┬─────┘
-                          │
-                         GND
+                      [Cap]──→ Pot Casing (Ground)
+                              (22nF-47nF)
+                        
+                    ┌───────┐
+                    │ Tone  │
+                    │ Lug 1 │ ← LEFT OPEN (No connection)
+                    └───────┘
 ```
 SWITCH LOGIC:
 Position A (NO):  Vol Lug 2 → [24-22] → Tone Lug 2  (MODERN WIRING)
@@ -278,14 +159,15 @@ VERSION 1.1 - INTEGRATED TREBLE-BLEED
                     │ Lug 3 │          ┌───┴────┐
                     └───┬───┘          │  1nF   │
                         │              │   +    │ (Cap + Resistor in series)
-                      [Cap]──┐         │ 150kΩ  │
-                        │    │         └───┬────┘
-                    ┌───┴────┴──┐          │
-                    │   Tone    │          │
-                    │   Lug 1   │◄─────────┘ (Treble-Bleed Side B → Pin 22)
-                    └─────┬─────┘
-                          │
-                         GND
+                      [Cap]──→ GND     │ 150kΩ  │
+                   (22nF-47nF)         └───┬────┘
+                                           │
+                    ┌───────┐              │
+                    │ Tone  │              │
+                    │ Lug 1 │ ← LEFT OPEN  │
+                    └───────┘              │
+                                           │
+        Treble-Bleed Side B connects to Pin 22 (COM)
 ```
 SWITCH LOGIC:
 Position A (NO):  Modern + Treble-Bleed ACTIVE
@@ -345,14 +227,13 @@ Same wiring as v1.1, BUT using ON-OFF-ON switch:
                     │ Lug 3 │   │          │
                     └───┬───┘   │      [T-Bleed]
                         │       │          │
-                      [Cap]──┐  └──────────┘
-                        │    │
-                    ┌───┴────┴──┐
-                    │   Tone    │
-                    │   Lug 1   │
-                    └─────┬─────┘
-                          │
-                         GND
+                      [Cap]─→GND└──────────┘
+                   (22nF-47nF)
+                        
+                    ┌───────┐
+                    │ Tone  │
+                    │ Lug 1 │ ← LEFT OPEN (No connection)
+                    └───────┘
 ```
 SWITCH POSITIONS (ON-OFF-ON):
 
@@ -404,12 +285,13 @@ SWITCH 2 (Capacitor Cascade):
           │  21   │ NC            │  24   │ NO
           └───┬───┘               └───┬───┘
               │                       │
-          [Cap 1]                 [Cap 2]
+          [Cap 1]──→ GND          [Cap 2]──→ GND
           (22nF)                  (47nF)
-              │                       │
-              └───────────┬───────────┘
-                          │
-                         GND
+
+                    ┌───────┐
+                    │ Tone  │
+                    │ Lug 1 │ ← LEFT OPEN (No connection)
+                    └───────┘
 ```
 SWITCH 2 LOGIC:
 Position A (NO):  Cap 2 (47nF) → Darker/Warmer tone
@@ -421,10 +303,25 @@ Combined with Switch 1:
   = 4 tonal variations total!
 
 ===============================================================================
+IMPORTANT NOTES - TONE POT WIRING
+===============================================================================
+
+CRITICAL CORRECTION:
+Tone Lug 1 must be LEFT OPEN (no connection)!
+
+WHY:
+- Tone pot acts as variable resistor between Lug 2 (signal) and Lug 3 (cap)
+- At "10": Wiper far from cap → High resistance → Bright
+- At "0": Wiper close to cap → Low resistance → Dark
+- If Lug 1 was grounded: At "0" entire signal would go to ground = SILENCE!
+
+ONLY Volume Lug 1 goes to ground (to kill signal at zero volume).
+
+===============================================================================
 LEGEND
 ===============================================================================
 │ ─ ┌ ┐ └ ┘ ├ ┤ ┬ ┴ ┼  = Wire connections
-◄              = Direction indicator
+◄ →            = Direction indicator
 [Cap]          = Capacitor
 [T-Bleed]      = Treble-Bleed Network (Cap + Resistor)
 GND            = Ground connection
@@ -432,6 +329,11 @@ DPDT           = Double-Pole Double-Throw switch
 NO             = Normally Open contact
 NC             = Normally Closed contact
 COM            = Common/Center contact
+
+===============================================================================
+EOF - END OF FILE
+===============================================================================
+   
 
 
 License
